@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LVAC Race Results Dashboard</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+     <script src="js/papaparse.min.js"></script>
+    <script src="js/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -34,18 +34,18 @@
             font-size: 2.5rem;
             font-weight: bold;
             color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .banner p {
+            color: #1e40af;
+            font-size: 1.125rem;
         }
         
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 2rem;
-        }
-        
-        .description {
-            color: #6b7280;
-            line-height: 1.6;
-            max-width: 900px;
         }
         
         .section {
@@ -257,7 +257,8 @@
     <!-- Banner -->
     <div class="banner">
         <div class="banner-content">
-            <h1>Race Results Dashboard</h1>
+            <h1>Liffey Valley Athletic Club</h1>
+            <p>LVAC 1974 - 2024 | 50 Years of Excellence</p>
         </div>
     </div>
 
@@ -269,8 +270,8 @@
         <div id="main-content" style="display: none;">
             <!-- Title -->
             <div style="margin-bottom: 2rem;">
-                <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 0.75rem;">Liffey Valley Athletic Club</h2>
-                <p class="description">An interactive panel designed to visualize, explore, and analyze race results from LVAC members. It centralizes competition data in one place and provides dynamic filtering tools to quickly access relevant information, making it easier to track athlete performance, review event details, and identify trends across different races and surfaces.</p>
+                <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">Race Results Dashboard</h2>
+                <p style="color: #6b7280;">Explore and analyze race results from LVAC members. Filter by athlete, date, surface, and more.</p>
             </div>
 
             <!-- Column Visibility -->
@@ -295,16 +296,8 @@
                         <label class="filter-label">Athlete Name</label>
                         <input type="text" id="athleteSearch" placeholder="Search athlete...">
                     </div>
-                    <div class="filter-group">
-                        <label class="filter-label">Race Name (Search)</label>
-                        <input type="text" id="raceSearch" placeholder="Search race...">
-                    </div>
                 </div>
                 <div class="filters-grid">
-                    <div class="filter-group">
-                        <label class="filter-label">Race Name (Select Multiple)</label>
-                        <div id="raceFilters" class="filter-checkboxes"></div>
-                    </div>
                     <div class="filter-group">
                         <label class="filter-label">Surface</label>
                         <div id="surfaceFilters" class="filter-checkboxes"></div>
@@ -313,19 +306,16 @@
                         <label class="filter-label">Gender</label>
                         <div id="genderFilters" class="filter-checkboxes"></div>
                     </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Distance</label>
+                        <div id="distanceFilters" class="filter-checkboxes"></div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Race Name</label>
+                        <div id="raceFilters" class="filter-checkboxes"></div>
+                    </div>
                 </div>
                 <button class="btn btn-primary" onclick="clearFilters()">Clear All Filters</button>
-            </div>
-
-            <!-- Results Table -->
-            <div class="section">
-                <h3 class="section-title" id="tableTitle">Race Results</h3>
-                <div class="table-container">
-                    <table>
-                        <thead id="tableHeader"></thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                </div>
             </div>
 
             <!-- Statistics Cards -->
@@ -350,6 +340,17 @@
                     <div id="surfaceList" class="surface-list"></div>
                 </div>
             </div>
+
+            <!-- Results Table -->
+            <div class="section">
+                <h3 class="section-title" id="tableTitle">Race Results</h3>
+                <div class="table-container">
+                    <table>
+                        <thead id="tableHeader"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -361,9 +362,9 @@
             dateFrom: '',
             dateTo: '',
             athlete: '',
-            raceSearch: '',
             surfaces: [],
             genders: [],
+            distances: [],
             raceNames: []
         };
         
@@ -388,11 +389,10 @@
                     allData = results.data.filter(row => row.DATE); // Filtrar filas vacías
                     filteredData = [...allData];
                     
-                    // Inicializar columnas visibles - desactivar algunas por defecto
+                    // Inicializar columnas visibles
                     if (allData.length > 0) {
-                        const hiddenColumns = ['ID', 'LOCATION', 'SURFACE', 'ORGANISATION', 'CATEGORY', 'GRADE'];
                         Object.keys(allData[0]).forEach(col => {
-                            visibleColumns[col] = !hiddenColumns.includes(col);
+                            visibleColumns[col] = true;
                         });
                     }
                     
@@ -415,9 +415,8 @@
             columns.forEach(col => {
                 const label = document.createElement('label');
                 label.className = 'checkbox-label';
-                const checked = visibleColumns[col] ? 'checked' : '';
                 label.innerHTML = `
-                    <input type="checkbox" ${checked} onchange="toggleColumn('${col}')">
+                    <input type="checkbox" checked onchange="toggleColumn('${col}')">
                     <span>${col}</span>
                 `;
                 columnCheckboxes.appendChild(label);
@@ -427,18 +426,19 @@
             const uniqueValues = {
                 surfaces: [...new Set(allData.map(d => d.SURFACE).filter(Boolean))],
                 genders: [...new Set(allData.map(d => d.GENDER).filter(Boolean))],
-                raceNames: [...new Set(allData.map(d => d['RACE NAME']).filter(Boolean))].sort()
+                distances: [...new Set(allData.map(d => d.DISTANCE).filter(Boolean))],
+                raceNames: [...new Set(allData.map(d => d['RACE NAME']).filter(Boolean))]
             };
             
-            createFilterCheckboxes('raceFilters', uniqueValues.raceNames, 'raceNames');
             createFilterCheckboxes('surfaceFilters', uniqueValues.surfaces, 'surfaces');
             createFilterCheckboxes('genderFilters', uniqueValues.genders, 'genders');
+            createFilterCheckboxes('distanceFilters', uniqueValues.distances, 'distances');
+            createFilterCheckboxes('raceFilters', uniqueValues.raceNames, 'raceNames');
             
             // Event listeners
             document.getElementById('dateFrom').addEventListener('change', applyFilters);
             document.getElementById('dateTo').addEventListener('change', applyFilters);
             document.getElementById('athleteSearch').addEventListener('input', applyFilters);
-            document.getElementById('raceSearch').addEventListener('input', applyFilters);
         }
 
         function createFilterCheckboxes(containerId, values, filterKey) {
@@ -474,16 +474,15 @@
                 dateFrom: '',
                 dateTo: '',
                 athlete: '',
-                raceSearch: '',
                 surfaces: [],
                 genders: [],
+                distances: [],
                 raceNames: []
             };
             
             document.getElementById('dateFrom').value = '';
             document.getElementById('dateTo').value = '';
             document.getElementById('athleteSearch').value = '';
-            document.getElementById('raceSearch').value = '';
             
             document.querySelectorAll('.filter-checkboxes input[type="checkbox"]').forEach(cb => {
                 cb.checked = false;
@@ -496,15 +495,14 @@
             filters.dateFrom = document.getElementById('dateFrom').value;
             filters.dateTo = document.getElementById('dateTo').value;
             filters.athlete = document.getElementById('athleteSearch').value;
-            filters.raceSearch = document.getElementById('raceSearch').value;
             
             filteredData = allData.filter(row => {
                 if (filters.dateFrom && row.DATE < filters.dateFrom) return false;
                 if (filters.dateTo && row.DATE > filters.dateTo) return false;
                 if (filters.athlete && !row.ATHLETE?.toLowerCase().includes(filters.athlete.toLowerCase())) return false;
-                if (filters.raceSearch && !row['RACE NAME']?.toLowerCase().includes(filters.raceSearch.toLowerCase())) return false;
                 if (filters.surfaces.length > 0 && !filters.surfaces.includes(row.SURFACE)) return false;
                 if (filters.genders.length > 0 && !filters.genders.includes(row.GENDER)) return false;
+                if (filters.distances.length > 0 && !filters.distances.includes(row.DISTANCE)) return false;
                 if (filters.raceNames.length > 0 && !filters.raceNames.includes(row['RACE NAME'])) return false;
                 return true;
             });
@@ -516,17 +514,6 @@
             updateStats();
             updateCharts();
             updateTable();
-        }
-
-        function parseTime(timeStr) {
-            if (!timeStr) return 0;
-            const parts = timeStr.split(':');
-            if (parts.length === 3) {
-                return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseFloat(parts[2]);
-            } else if (parts.length === 2) {
-                return parseInt(parts[0]) * 60 + parseFloat(parts[1]);
-            }
-            return 0;
         }
 
         function updateStats() {
@@ -559,27 +546,22 @@
                 
                 let totalDistance = 0;
                 let totalTimeSeconds = 0;
-                let validRaces = 0;
                 
                 athleteData.forEach(row => {
-                    const distStr = row.DISTANCE?.toString().trim();
-                    if (distStr) {
-                        const dist = parseFloat(distStr);
-                        if (!isNaN(dist) && dist > 0) {
-                            totalDistance += dist;
-                            const timeSeconds = parseTime(row.TIME);
-                            if (timeSeconds > 0) {
-                                totalTimeSeconds += timeSeconds;
-                                validRaces++;
-                            }
-                        }
+                    const dist = parseFloat(row.DISTANCE) || 0;
+                    totalDistance += dist;
+                    
+                    const timeParts = row.TIME?.split(':') || [];
+                    if (timeParts.length === 3) {
+                        const seconds = parseInt(timeParts[0]) * 3600 + parseInt(timeParts[1]) * 60 + parseInt(timeParts[2]);
+                        totalTimeSeconds += seconds;
                     }
                 });
                 
                 const avgPaceSecondsPerKm = totalDistance > 0 ? totalTimeSeconds / totalDistance : 0;
                 const paceMinutes = Math.floor(avgPaceSecondsPerKm / 60);
                 const paceSeconds = Math.floor(avgPaceSecondsPerKm % 60);
-                const avgPace = avgPaceSecondsPerKm > 0 ? `${paceMinutes}:${paceSeconds.toString().padStart(2, '0')}` : 'N/A';
+                const avgPace = `${paceMinutes}:${paceSeconds.toString().padStart(2, '0')}`;
                 
                 statsHTML += `
                     <div class="stat-card green">
@@ -681,15 +663,6 @@
                 genderCount[row.GENDER] = (genderCount[row.GENDER] || 0) + 1;
             });
             
-            const genderColors = {
-                'Men': '#3B82F6',
-                'Women': '#EF4444',
-                'Male': '#3B82F6',
-                'Female': '#EF4444',
-                'M': '#3B82F6',
-                'F': '#EF4444'
-            };
-            
             if (charts.gender) charts.gender.destroy();
             charts.gender = new Chart(document.getElementById('genderChart'), {
                 type: 'pie',
@@ -697,7 +670,7 @@
                     labels: Object.keys(genderCount),
                     datasets: [{
                         data: Object.values(genderCount),
-                        backgroundColor: Object.keys(genderCount).map(g => genderColors[g] || '#999')
+                        backgroundColor: ['#3B82F6', '#EC4899']
                     }]
                 },
                 options: {
