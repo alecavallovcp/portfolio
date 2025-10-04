@@ -16,7 +16,11 @@ OK -> Agregados botones para filtrar por año 2024 y 2025
 
 OK -> Achicar los otros tres gráficos Races by Surface, Participants by Gender y Surface Breakdown.
 
-Total Records Tiene que ser el total de registros sin filtrarse.
+21:38 04/10/2025
+OK -> Races by Surface and Surface Breakdown (OK) tiene que ser de se las filteredRaces.
+
+
+Ver dónde ingresar los totales de registro. Capaz una pequeña línea en algún lado con el total de registrations, races, athletes.
 
 Salto de página para la impresión. O mejor que se pueda exportar la tabla? Imprimirla directamente?
 
@@ -25,7 +29,6 @@ Mostrar fecha de registro más antiguo y última fecha registrada.
 El cálculo e distancia todavía no funciona.
 
 Gráfico Races by Month que ocupe todo el ancho de la pantalla.
-
 
 Filtrar por distancia Min y Max
 

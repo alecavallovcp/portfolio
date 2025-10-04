@@ -209,10 +209,10 @@
         }
         
         th, td {
-            padding: 0.75rem;
+            padding: 0.4rem;
             text-align: left;
             border-bottom: 1px solid #e5e7eb;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
         }
         
         th {
@@ -223,10 +223,24 @@
         tbody tr:hover {
             background-color: #f9fafb;
         }
+
+        /* Centrar el contenido de columnas específicas */
+        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace {
+            text-align: center;
+        }
+  
+        .col-time {
+            min-width: 70px; /* Ancho minimo */
+        }
+        
+        .col-athlete {
+            white-space: nowrap; /* Evitar que el texto se corte en varias líneas */
+        }
+    
         
         .table-container {
             overflow-x: auto;
-            max-height: 1000px;
+            max-height: 600px;
             overflow-y: auto;
         }
         
@@ -815,7 +829,7 @@
             // Header
             let headerHTML = '<tr>';
             columns.forEach(col => {
-                headerHTML += `<th>${col}</th>`;
+                headerHTML += `<th class="col-${col.toLowerCase().replace(/\s+/g, '-')}">${col}</th>`;
             });
             headerHTML += '</tr>';
             document.getElementById('tableHeader').innerHTML = headerHTML;
@@ -826,7 +840,7 @@
             displayData.forEach(row => {
                 bodyHTML += '<tr>';
                 columns.forEach(col => {
-                    bodyHTML += `<td>${row[col] || ''}</td>`;
+                    bodyHTML += `<td class="col-${col.toLowerCase().replace(/\s+/g, '-')}">${row[col] || ''}</td>`;
                 });
                 bodyHTML += '</tr>';
             });
