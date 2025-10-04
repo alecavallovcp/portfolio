@@ -165,9 +165,9 @@
         
         .charts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
         
         .chart-container {
@@ -258,7 +258,8 @@
     <!-- Banner -->
     <div class="banner">
         <div class="banner-content">
-            <h1><img src="LVAC_2024_logo.png"> Liffey Valley Athletic Club</h1>
+            <img src="LVAC_2024_logo.png" width="100" alt="LVAC Logo" style="margin-bottom: -1rem;">
+            <h1>Liffey Valley Athletic Club</h1>
             <p>LVAC Results and Statistics</p>
         </div>
     </div>
@@ -344,6 +345,8 @@
                     <h3 class="chart-title">Races by Month</h3>
                     <canvas id="monthChart"></canvas>
                 </div>
+            </div>
+            <div class="charts-grid">
                 <div class="chart-container">
                     <h3 class="chart-title">Races by Surface</h3>
                     <canvas id="surfaceChart"></canvas>
@@ -551,7 +554,8 @@
         }
 
         function updateStats() {
-            const totalRaces = filteredData.length;
+            const totalRecords = filteredData.length;
+            const totalRaces = new Set(filteredData.map(d => d.ID)).size;
             const uniqueAthletes = new Set(filteredData.map(d => d.ATHLETE)).size;
             
             const surfaceCount = {};
@@ -563,9 +567,14 @@
             
             let statsHTML = `
                 <div class="stat-card blue">
+                    <div class="stat-value">${totalRecords}</div>
+                    <div class="stat-label">Total Records</div>
+                </div>                
+                <div class="stat-card blue">
                     <div class="stat-value">${totalRaces}</div>
                     <div class="stat-label">Total Races</div>
                 </div>
+
                 <div class="stat-card yellow">
                     <div class="stat-value">${uniqueAthletes}</div>
                     <div class="stat-label">Total Participants</div>
