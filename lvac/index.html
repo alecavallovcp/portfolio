@@ -579,8 +579,9 @@
             
 
             const genderCount = {};
-
+            const surfaceIds = {}; // Objeto para rastrear IDs únicos por superficie
             const surfaceCount = {};            
+            
             filteredData.forEach(row => {
                 /*surfaceCount[row.SURFACE] = (surfaceCount[row.SURFACE] || 0) + 1;*/
                 if (!surfaceIds[row.SURFACE]) {
