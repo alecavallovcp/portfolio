@@ -191,7 +191,7 @@
             padding: 1.5rem;
         }
         
-        .chart-title {
+        .chart-title, .chart-title2 {
             font-size: 1.25rem;
             font-weight: bold;
             margin-bottom: 1rem;
@@ -363,7 +363,7 @@
             </div>
             <div class="charts-grid">
                 <div class="chart-container">
-                    <h3 class="chart-title">Races by Surface</h3>
+                    <h3 class="chart-title2">Races by Surface</h3>
                     <canvas id="surfaceChart"></canvas>
                 </div>
                 <div class="chart-container">
@@ -592,11 +592,14 @@
                 genderCount[row.GENDER] = (genderCount[row.GENDER] || 0) + 1;
             });
 
-            // Calcula el conteo de IDs únicos por superficie
+                // Calcula el conteo de IDs únicos por superficie
                 Object.keys(surfaceIds).forEach(surface => {
                     surfaceCount[surface] = surfaceIds[surface].size;
                 });
 
+                // Actualiza el título con el total de Races
+                const racesBySurfaceTitle = document.querySelector('.chart-title2');
+                racesBySurfaceTitle.textContent = `Races by Surface [${filteredRaces}]`;
             
             let statsHTML = `
                 <div class="stat-card brown">
