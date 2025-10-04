@@ -47,6 +47,7 @@
             max-width: 1280px;
             margin: 0 auto;
             padding: 1rem;
+            margin-top: -0.7rem;
         }
         
         .description {
@@ -366,13 +367,13 @@
                     <canvas id="surfaceChart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <h3 class="chart-title">Participants by Gender</h3>
-                    <canvas id="genderChart"></canvas>
-                </div>
-                <div class="chart-container">
                     <h3 class="chart-title">Surface Breakdown</h3>
                     <div id="surfaceList" class="surface-list"></div>
                 </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Participants by Gender</h3>
+                    <canvas id="genderChart"></canvas>
+                </div>            
             </div>
         </div>
     </div>
@@ -576,12 +577,25 @@
             const filteredRaces = new Set(filteredData.map(d => d.ID)).size;
             const filteredAthletes = new Set(filteredData.map(d => d.ATHLETE)).size;
             
-            const surfaceCount = {};
+
             const genderCount = {};
+
+            const surfaceCount = {};            
             filteredData.forEach(row => {
-                surfaceCount[row.SURFACE] = (surfaceCount[row.SURFACE] || 0) + 1;
+                /*surfaceCount[row.SURFACE] = (surfaceCount[row.SURFACE] || 0) + 1;*/
+                if (!surfaceIds[row.SURFACE]) {
+                    surfaceIds[row.SURFACE] = new Set(); // Inicializa un conjunto para cada superficie
+                }
+                surfaceIds[row.SURFACE].add(row.ID); // Agrega el ID al conjunto correspondiente a la superficie
+                
                 genderCount[row.GENDER] = (genderCount[row.GENDER] || 0) + 1;
             });
+
+            // Calcula el conteo de IDs únicos por superficie
+                Object.keys(surfaceIds).forEach(surface => {
+                    surfaceCount[surface] = surfaceIds[surface].size;
+                });
+
             
             let statsHTML = `
                 <div class="stat-card brown">
