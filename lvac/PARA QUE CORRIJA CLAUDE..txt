@@ -12,12 +12,24 @@ Corregir el cálculo de Total Distance (km) Avg Pace (min/km) porque muestran 0 
 Dame el código necesario para agregar un botón justo debajo de "Filtros" que configure Date From en 01/10/2024 y "Date To" en 30/09/2025 -> OK
 
 13:22 04/10/2025
+OK -> Agregados botones para filtrar por año 2024 y 2025
+
+OK -> Achicar los otros tres gráficos Races by Surface, Participants by Gender y Surface Breakdown.
+
+Total Records Tiene que ser el total de registros sin filtrarse.
+
 Salto de página para la impresión. O mejor que se pueda exportar la tabla? Imprimirla directamente?
+
+Mostrar fecha de registro más antiguo y última fecha registrada.
 
 El cálculo e distancia todavía no funciona.
 
 Gráfico Races by Month que ocupe todo el ancho de la pantalla.
-Achicar los otros tres gráficos Races by Surface, Participants by Gender y Surface Breakdown.
+
 
 Filtrar por distancia Min y Max
+
+Ancho de la columna DATE que sea lo suficientemente ancha para que entre YYYY-MM-DD en un sólo renglón.
+
+
 

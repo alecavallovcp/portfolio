@@ -568,9 +568,13 @@
         }
 
         function updateStats() {
-            const totalRecords = filteredData.length;
-            const totalRaces = new Set(filteredData.map(d => d.ID)).size;
-            const uniqueAthletes = new Set(filteredData.map(d => d.ATHLETE)).size;
+            const totalRecords = allData.length;
+            const totalRaces = filteredData.length;
+            const totalAthletes = new Set(allData.map(d => d.ATHLETE)).size;   
+
+            const filteredRecords = filteredData.length;
+            const filteredRaces = new Set(filteredData.map(d => d.ID)).size;
+            const filteredAthletes = new Set(filteredData.map(d => d.ATHLETE)).size;
             
             const surfaceCount = {};
             const genderCount = {};
@@ -581,17 +585,16 @@
             
             let statsHTML = `
                 <div class="stat-card brown">
-                    <div class="stat-value">${totalRecords}</div>
-                    <div class="stat-label">Total Records</div>
+                    <div class="stat-value">${filteredRecords}</div>
+                    <div class="stat-label">Registrations</div>
                 </div>                
                 <div class="stat-card blue">
-                    <div class="stat-value">${totalRaces}</div>
-                    <div class="stat-label">Total Races</div>
+                    <div class="stat-value">${filteredRaces}</div>
+                    <div class="stat-label">Races</div>
                 </div>
-
                 <div class="stat-card yellow">
-                    <div class="stat-value">${uniqueAthletes}</div>
-                    <div class="stat-label">Total Participants</div>
+                    <div class="stat-value">${filteredAthletes}</div>
+                    <div class="stat-label">Participants</div>
                 </div>
             `;
             
@@ -605,16 +608,28 @@
                 let totalTimeSeconds = 0;
                 let validRaces = 0;
                 
-                athleteData.forEach(row => {
+athleteData.forEach(row => {
                     const distStr = row.DISTANCE?.toString().trim();
+                    console.log("Raw DISTANCE value:", row.DISTANCE); // Verificar el valor original de DISTANCE
+                    console.log("Processed DISTANCE string:", distStr); // Verificar el valor después de convertirlo a string y limpiar espacios
+                
                     if (distStr) {
                         const dist = parseFloat(distStr);
+                        console.log("Parsed DISTANCE as number:", dist); // Verificar el valor después de convertirlo a número
+                
                         if (!isNaN(dist) && dist > 0) {
                             totalDistance += dist;
+                            console.log("Added to totalDistance:", totalDistance); // Verificar la suma acumulada de distancias
+                
                             const timeSeconds = parseTime(row.TIME);
+                            console.log("Raw TIME value:", row.TIME); // Verificar el valor original de TIME
+                            console.log("Parsed TIME in seconds:", timeSeconds); // Verificar el tiempo convertido a segundos
+                
                             if (timeSeconds > 0) {
                                 totalTimeSeconds += timeSeconds;
                                 validRaces++;
+                                console.log("Added to totalTimeSeconds:", totalTimeSeconds); // Verificar la suma acumulada de tiempos
+                                console.log("Incremented validRaces:", validRaces); // Verificar el contador de carreras válidas
                             }
                         }
                     }
