@@ -35,8 +35,14 @@
             font-size: 2.5rem;
             font-weight: bold;
             color: #1e3a8a;
+            margin-bottom: -0.4rem;
         }
         
+        .subtitle {
+            font-size: 1.25rem;
+            color: #374151;
+            margin-bottom: -1rem;
+        }
         .container {
             max-width: 1280px;
             margin: 0 auto;
@@ -98,6 +104,11 @@
             margin-bottom: 0.5rem;
             color: #374151;
         }
+        .filter-label2 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #ff6200;
+        }
         
         input[type="date"],
         input[type="text"] {
@@ -135,7 +146,7 @@
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
             gap: 1rem;
             margin-bottom: 0.5rem;
         }
@@ -151,6 +162,8 @@
         .stat-card.yellow { background: linear-gradient(135deg, #eab308 0%, #facc15 100%); }
         .stat-card.green { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
         .stat-card.purple { background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); }
+        .stat-card.red { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); }
+        .stat-card.brown { background: linear-gradient(135deg, #78350f 0%, #a16207 100%); }
         
         .stat-value {
             font-size: 2rem;
@@ -210,7 +223,7 @@
         
         .table-container {
             overflow-x: auto;
-            max-height: 600px;
+            max-height: 1000px;
             overflow-y: auto;
         }
         
@@ -258,9 +271,9 @@
     <!-- Banner -->
     <div class="banner">
         <div class="banner-content">
-            <img src="LVAC_2024_logo.png" width="100" alt="LVAC Logo" style="margin-bottom: -1rem;">
+            <img src="LVAC_2024_logo.png" width="100" alt="LVAC Logo" style="margin-bottom: -1.3rem;">
             <h1>Liffey Valley Athletic Club</h1>
-            <p>LVAC Results and Statistics</p>
+            <p class="subtitle">LVAC Results and Statistics</p>
         </div>
     </div>
 
@@ -299,10 +312,6 @@
                         <input type="date" id="dateTo">
                     </div>
                     <div class="filter-group">
-                        <label class="filter-label">Athlete Name</label>
-                        <input type="text" id="athleteSearch" placeholder="Search athlete...">
-                    </div>
-                    <div class="filter-group">
                         <label class="filter-label">Surface</label>
                         <div id="surfaceFilters" class="filter-checkboxes"></div>
                     </div>
@@ -313,14 +322,19 @@
                 </div>
                 <div class="filters-grid">
                     <div class="filter-group">
-                        <label class="filter-label">Race Name (Select Multiple)</label>
-                        <div id="raceFilters" class="filter-checkboxes"></div>
+                        <label class="filter-label2">Athlete Name</label>
+                        <input type="text" id="athleteSearch" placeholder="Search athlete...">
                     </div>
+                </div>
+                <div class="filters-grid">
                     <div class="filter-group">
                         <label class="filter-label">Race Name (Search)</label>
                         <input type="text" id="raceSearch" placeholder="Search race...">
                     </div>
-
+                    <div class="filter-group">
+                        <label class="filter-label">Race Name (Select Multiple)</label>
+                        <div id="raceFilters" class="filter-checkboxes"></div>
+                    </div>
                 </div>
                 <button class="btn btn-primary" onclick="clearFilters()">Clear All Filters</button>
             </div>
@@ -566,7 +580,7 @@
             });
             
             let statsHTML = `
-                <div class="stat-card blue">
+                <div class="stat-card brown">
                     <div class="stat-value">${totalRecords}</div>
                     <div class="stat-label">Total Records</div>
                 </div>                
