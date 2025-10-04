@@ -371,7 +371,7 @@
                     <div id="surfaceList" class="surface-list"></div>
                 </div>
                 <div class="chart-container">
-                    <h3 class="chart-title">Participants by Gender</h3>
+                    <h3 class="chart-title">Participations by Gender</h3>
                     <canvas id="genderChart"></canvas>
                 </div>            
             </div>
@@ -581,7 +581,7 @@
             const genderCount = {};
             const surfaceIds = {}; // Objeto para rastrear IDs únicos por superficie
             const surfaceCount = {};            
-            
+
             filteredData.forEach(row => {
                 /*surfaceCount[row.SURFACE] = (surfaceCount[row.SURFACE] || 0) + 1;*/
                 if (!surfaceIds[row.SURFACE]) {
@@ -729,10 +729,21 @@
             });
             
             // Surface Pie Chart
-            const surfaceCount = {};
+            const surfaceIds = {}; // Objeto para rastrear IDs únicos por superficie
+            const surfaceCount = {};            
+
             filteredData.forEach(row => {
-                surfaceCount[row.SURFACE] = (surfaceCount[row.SURFACE] || 0) + 1;
+                /*surfaceCount[row.SURFACE] = (surfaceCount[row.SURFACE] || 0) + 1;*/
+                if (!surfaceIds[row.SURFACE]) {
+                    surfaceIds[row.SURFACE] = new Set(); // Inicializa un conjunto para cada superficie
+                }
+                surfaceIds[row.SURFACE].add(row.ID); // Agrega el ID al conjunto correspondiente a la superficie
             });
+
+            // Calcula el conteo de IDs únicos por superficie
+                Object.keys(surfaceIds).forEach(surface => {
+                    surfaceCount[surface] = surfaceIds[surface].size;
+                });
             
             if (charts.surface) charts.surface.destroy();
             charts.surface = new Chart(document.getElementById('surfaceChart'), {
