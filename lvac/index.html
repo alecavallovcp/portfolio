@@ -7,6 +7,7 @@
     <script src="js/papaparse.min.js"></script>
     <script src="js/chart.umd.min.js"></script>
     <script src="js/chartjs-plugin-doughnutlabel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     <style>
         * {
             margin: 0;
@@ -629,27 +630,19 @@
                 
                  athleteData.forEach(row => {
                     const distStr = row['DISTANCE KM']?.toString().trim(); // Cambiado a 'DISTANCE KM'
-                    console.log("Row data:", row); // Verifica qué columnas están presentes en cada fila
-                    console.log("Raw DISTANCE value:", row['DISTANCE KM']); // Verificar el valor original de DISTANCE KM
-                    console.log("Processed DISTANCE string:", distStr); // Verificar el valor después de convertirlo a string y limpiar espacios
+
                 
                     if (distStr) {
                         const dist = parseFloat(distStr);
-                        console.log("Parsed DISTANCE as number:", dist); // Verificar el valor después de convertirlo a número
                 
                         if (!isNaN(dist) && dist > 0) {
                             totalDistance += dist;
-                            console.log("Added to totalDistance:", totalDistance); // Verificar la suma acumulada de distancias
                 
                             const timeSeconds = parseTime(row.TIME);
-                            console.log("Raw TIME value:", row.TIME); // Verificar el valor original de TIME
-                            console.log("Parsed TIME in seconds:", timeSeconds); // Verificar el tiempo convertido a segundos
                 
                             if (timeSeconds > 0) {
                                 totalTimeSeconds += timeSeconds;
                                 validRaces++;
-                                console.log("Added to totalTimeSeconds:", totalTimeSeconds); // Verificar la suma acumulada de tiempos
-                                console.log("Incremented validRaces:", validRaces); // Verificar el contador de carreras válidas
                             }
                         }
                     }
@@ -777,22 +770,27 @@
                                 }
                             }
                         },
-                        doughnutlabel: {
-                            labels: [
-                            {
-                                text: Object.values(surfaceCount).reduce((a, b) => a + b, 0), // Total de categorías
+
+                    }
+                },                
+                    annotation: {
+                        annotations: {
+                            totalRaces: {
+                                type: 'label',
+                                content: [
+                                    Object.values(surfaceCount).reduce((a, b) => a + b, 0), // Total de categorías
+                                    'Total Races'
+                                ],
+                                position: 'center',
                                 font: {
                                     size: 20,
                                     weight: 'bold'
-                                }
-                            },
-                            {
-                                text: 'Total Races'
+                                },
+                                color: '#111827', // Color del texto
+                                textAlign: 'center'
                             }
-                        ]
                         }
                     }
-                }
             });
             
             // Gender Pie Chart
