@@ -608,8 +608,9 @@
                 let totalTimeSeconds = 0;
                 let validRaces = 0;
                 
-athleteData.forEach(row => {
+                athleteData.forEach(row => {
                     const distStr = row.DISTANCE?.toString().trim();
+                    console.log("Row data:", row); // Verifica qué columnas están presentes en cada fila
                     console.log("Raw DISTANCE value:", row.DISTANCE); // Verificar el valor original de DISTANCE
                     console.log("Processed DISTANCE string:", distStr); // Verificar el valor después de convertirlo a string y limpiar espacios
                 
