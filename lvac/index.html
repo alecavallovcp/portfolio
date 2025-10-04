@@ -6,6 +6,7 @@
     <title>LVAC Race Results Dashboard</title>
     <script src="js/papaparse.min.js"></script>
     <script src="js/chart.umd.min.js"></script>
+    <script src="js/chartjs-plugin-doughnutlabel.js"></script>
     <style>
         * {
             margin: 0;
@@ -749,7 +750,7 @@
                 });
             
             if (charts.surface) charts.surface.destroy();
-            charts.surface = new Chart(document.getElementById('surfaceChart'), {
+                charts.surface = new Chart(document.getElementById('surfaceChart'), {
                 type: 'pie',
                 data: {
                     labels: Object.keys(surfaceCount),
@@ -760,7 +761,37 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true
+                    maintainAspectRatio: true,
+                    /* Las siguientes opciones son para personalizar la leyenda */
+                    plugins: {
+                        legend: {
+                            labels: {
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    return data.labels.map((label, index) => ({
+                                        text: `${label} [${data.datasets[0].data[index]}]`, // Agrega el conteo a la etiqueta
+                                        fillStyle: data.datasets[0].backgroundColor[index],
+                                        hidden: false,
+                                        index: index
+                                    }));
+                                }
+                            }
+                        },
+                        doughnutlabel: {
+                            labels: [
+                            {
+                                text: Object.values(surfaceCount).reduce((a, b) => a + b, 0), // Total de categorías
+                                font: {
+                                    size: 20,
+                                    weight: 'bold'
+                                }
+                            },
+                            {
+                                text: 'Total Races'
+                            }
+                        ]
+                        }
+                    }
                 }
             });
             
