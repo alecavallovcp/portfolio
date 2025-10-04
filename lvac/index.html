@@ -6,8 +6,8 @@
     <title>LVAC Race Results Dashboard</title>
     <script src="js/papaparse.min.js"></script>
     <script src="js/chart.umd.min.js"></script>
-    <script src="js/chartjs-plugin-doughnutlabel.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <!--<script src="js/chartjs-plugin-doughnutlabel.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>-->
     <style>
         * {
             margin: 0;
@@ -773,24 +773,6 @@
 
                     }
                 },                
-                    annotation: {
-                        annotations: {
-                            totalRaces: {
-                                type: 'label',
-                                content: [
-                                    Object.values(surfaceCount).reduce((a, b) => a + b, 0), // Total de categorías
-                                    'Total Races'
-                                ],
-                                position: 'center',
-                                font: {
-                                    size: 20,
-                                    weight: 'bold'
-                                },
-                                color: '#111827', // Color del texto
-                                textAlign: 'center'
-                            }
-                        }
-                    }
             });
             
             // Gender Pie Chart
