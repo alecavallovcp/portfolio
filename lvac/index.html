@@ -258,6 +258,7 @@
     <div class="banner">
         <div class="banner-content">
             <h1>Liffey Valley Athletic Club</h1>
+            <p>LVAC Results and Statistics</p>
         </div>
     </div>
 
@@ -281,7 +282,11 @@
 
             <!-- Filters -->
             <div class="section">
-                <h3 class="section-title">Filters <button class="btn btn-primary" onclick="setSeasonDates()" style="margin-left: 0.5rem;">Season 2024-2025</button></h3>
+                <h3 class="section-title">Filters
+                    <button class="btn btn-primary" onclick="setSeasonDates()" style="margin-left: 0.5rem;">Season 2024-2025</button>
+                    <button class="btn btn-primary" onclick="setYearDate(2024)" style="margin-left: 0.5rem;">2024</button>
+                    <button class="btn btn-primary" onclick="setYearDate(2025)" style="margin-left: 0.5rem;">2025</button>
+                </h3>
                 <div class="filters-grid">
                     <div class="filter-group">
                         <label class="filter-label">Date From</label>
@@ -368,10 +373,10 @@
         };
         
         const SURFACE_COLORS = {
-            'Road': '#3B82F6',
+            'Road': '#999',
             'Trail': '#10B981',
-            'Track': '#F59E0B',
-            'Cross Country': '#8B5CF6'
+            'Track': '#3B82F6',
+            'Cross Country': '#F59E0B'
         };
 
         let charts = {
@@ -390,7 +395,7 @@
                     
                     // Inicializar columnas visibles - desactivar algunas por defecto
                     if (allData.length > 0) {
-                        const hiddenColumns = ['ID', 'LOCATION', 'SURFACE', 'ORGANISATION', 'CATEGORY', 'GRADE'];
+                        const hiddenColumns = ['ID', 'LOCATION', 'SURFACE', 'ORGANISATION', 'CATEGORY', 'GRADE', 'NOTES'];
                         Object.keys(allData[0]).forEach(col => {
                             visibleColumns[col] = !hiddenColumns.includes(col);
                         });
@@ -496,6 +501,13 @@
                 clearFilters();
                 document.getElementById('dateFrom').value = '2024-10-01';
                 document.getElementById('dateTo').value = '2025-09-30';
+                applyFilters();
+        }
+
+        function setYearDate(year) {
+                clearFilters();
+                document.getElementById('dateFrom').value = `${year}-01-01`;
+                document.getElementById('dateTo').value = `${year}-12-31`;
                 applyFilters();
         }
 

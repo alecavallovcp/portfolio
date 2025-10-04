@@ -1,0 +1,23 @@
+PARA QUE CORRIJA CLAUDE.
+Excelente. El archivo se carga correctamente y los datos se visualizan muy bien.
+Quisiera que me entregues una versión nueva por vez, es decir no me hagas muchas versiones seguidas porque me consumen tokens.
+OK -> Quisiera que de forma predeterminada suceda lo siguiente:
+OK -> Column Visibility: Desactivar los campos ID, LOCATION, SURFACE, ORGANISATION, CATEGORY, GRADE.
+OK -> Gráfico Participants by Gender: Color AZUL para Men, color ROJO para Women.
+OK -> Filters: Borrar Distance. Hacer que Race Name se pueda filtrar por palabra clave al igual que Athlete Name pero que a la vez se puedan ver los nombres de las carreras y hacer selecciones múltiples, darle más importancia que Surface y Gender.
+Otros cambios:
+Corregir el cálculo de Total Distance (km) Avg Pace (min/km) porque muestran 0 (cero) todo el tiempo.
+
+
+Dame el código necesario para agregar un botón justo debajo de "Filtros" que configure Date From en 01/10/2024 y "Date To" en 30/09/2025 -> OK
+
+13:22 04/10/2025
+Salto de página para la impresión. O mejor que se pueda exportar la tabla? Imprimirla directamente?
+
+El cálculo e distancia todavía no funciona.
+
+Gráfico Races by Month que ocupe todo el ancho de la pantalla.
+Achicar los otros tres gráficos Races by Surface, Participants by Gender y Surface Breakdown.
+
+Filtrar por distancia Min y Max
+
