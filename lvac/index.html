@@ -473,6 +473,9 @@
                     
                     setupUI();
                     updateDisplay();
+
+                    // Mostrar estadísticas completas en el pie de página
+                    displayFullStatistics();
                 }
             });
         }
@@ -616,10 +619,6 @@
         }
 
         function updateStats() {
-            const totalRecords = allData.length;
-            const totalRaces = filteredData.length;
-            const totalAthletes = new Set(allData.map(d => d.ATHLETE)).size;   
-
             const filteredRecords = filteredData.length;
             const filteredRaces = new Set(filteredData.map(d => d.ID)).size;
             const filteredAthletes = new Set(filteredData.map(d => d.ATHLETE)).size;
@@ -1005,6 +1004,37 @@
         
             // Cierra la ventana después de imprimir
             //printWindow.close();
+        }
+
+        function displayFullStatistics() {
+            if (allData.length === 0) return;
+        
+            // Calcular estadísticas
+            const totalRecords = allData.length;
+            const totalRaces = new Set(allData.map(d => d.ID)).size;
+            const totalAthletes = new Set(allData.map(d => d.ATHLETE)).size;
+        
+            // Calcular fechas más antigua y más reciente
+            const allDates = allData.map(d => d.DATE).filter(Boolean).sort();
+            const earliestDate = allDates.length > 0 ? allDates[0] : 'N/A';
+            const latestDate = allDates.length > 0 ? allDates[allDates.length - 1] : 'N/A';
+        
+            // Crear el contenido del pie de página
+            const footerHTML = `
+                <div style="font-size: 0.75rem; text-align: center; color: #6b7280; padding: 0.5rem 0; border-top: 1px solid #e5e7eb;">
+                    <strong>Full Statistics:</strong> 
+                    Total Records: ${totalRecords} | 
+                    Total Races: ${totalRaces} | 
+                    Total Athletes: ${totalAthletes} | 
+                    Earliest Date: ${earliestDate} | 
+                    Latest Date: ${latestDate}
+                </div>
+            `;
+        
+            // Insertar el pie de página en el cuerpo
+            const footerContainer = document.createElement('div');
+            footerContainer.innerHTML = footerHTML;
+            document.body.appendChild(footerContainer);
         }
 
         // Initialize on load
