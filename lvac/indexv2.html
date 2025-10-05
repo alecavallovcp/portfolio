@@ -824,8 +824,6 @@
             filteredData.forEach(row => {
                 genderCount[row.GENDER] = (genderCount[row.GENDER] || 0) + 1;
             });
-
-            const totalParticipations = Object.values(genderCount).reduce((a, b) => a + b, 0); // Suma total de participaciones
             
             const genderColors = {
                 'Men': '#3B82F6',
@@ -835,12 +833,7 @@
                 'M': '#3B82F6',
                 'F': '#EF4444'
             };
-
-            // Actualiza el título con el conteo total
-            const genderChartTitle = document.querySelector('.chart-title');
-            genderChartTitle.textContent = `Participations by Gender [${totalParticipations}]`;
-
-            // Crear el gráfico
+            
             if (charts.gender) charts.gender.destroy();
             charts.gender = new Chart(document.getElementById('genderChart'), {
                 type: 'pie',
@@ -853,22 +846,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                generateLabels: function(chart) {
-                                    const data = chart.data;
-                                    return data.labels.map((label, index) => ({
-                                        text: `${label} (${data.datasets[0].data[index]})`, // Agrega el conteo a la etiqueta
-                                        fillStyle: data.datasets[0].backgroundColor[index],
-                                        hidden: false,
-                                        index: index
-                                    }));
-                                }
-                            }
-                        }
-                    }
+                    maintainAspectRatio: true
                 }
             });
         }

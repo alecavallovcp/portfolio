@@ -26,17 +26,22 @@ OK -> Ancho de la columna DATE que sea lo suficientemente ancha para que entre Y
 OK -> Salto de página para la impresión. O mejor que se pueda exportar la tabla? Imprimirla directamente?
 OK -> Multiples páginas cuando haya más de 100 registros, o botón "Show All" para que despliegue toda la tabla.
 
-Ver dónde ingresar los totales de registro. Capaz una pequeña línea en algún lado con el total de registrations, races, athletes.
+03:07 05/10/2025
+OK -> Al imprimir, enviar las estadísticas como dateFrom, dateTo, filteredRaces, filteredAthletes
+OK -> Al imprimir, enviar el logo de LVAC a la izquierda del título.
 
-Mostrar fecha de registro más antiguo y última fecha registrada.
+15:25 05/10/2025
+OK -> Ver dónde ingresar los totales de registro. Capaz una pequeña línea en algún lado con el totalRecords, totalRaces, totalAthletes.
+OK -> Mostrar fecha de registro más antiguo y última fecha registrada.
 
-Filtrar por distancia Min y Max
+
+Filtrar por distancia Min y Max.
 
 Athlete Name clickeable con link para filtrar por su nombre.
 
 Encabezados de tabla clickeables para ordenar de manera Ascendente o Descendente.
 
-Al imprimir, enviar las estadísticas como dateFrom, dateTo, filteredRaces, filteredAthletes
+Al imprimir, enviar una nota opcional que se agregue como descripción debajo del título, antes de la tabla.
 
-
+El botón Show Full Table debería desactivarse si la tabla no está limitada.
 
