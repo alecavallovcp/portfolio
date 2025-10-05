@@ -910,7 +910,8 @@
                         .header {
                             display: flex;
                             align-items: center;
-                            margin-bottom: 0.5rem;
+                            justify-content: space-between; /* Coloca el título a la izquierda y los stats a la derecha */
+                            margin-bottom: 0rem;
                         }
                         .header img {
                             width: 50px; /* Ajusta el tamaño del logo */
@@ -964,24 +965,29 @@
                             padding-right: 10px;
                         }
                         .stats {
-                            margin-bottom: 0.2rem;
+                            display: flex;
+                            gap: 1rem; /* Espaciado entre los stats */
+                            margin-bottom: 0.5rem;
+
                             font-size: 0.875rem;
                         }
                         .stats div {
-                            margin-bottom: 0rem;
+                            margin-bottom: -0.2rem;
                         }
                     </style>
                 </head>
                 <body>
                     <div class="header">
-                        <img src="LVAC_2024_logo.png" alt="LVAC Logo">
-                        <h2>Race Results</h2>
-                    </div>
-                    <div class="stats">
-                        <div><strong>Date From:</strong> ${dateFrom}</div>
-                        <div><strong>Date To:</strong> ${dateTo}</div>
-                        <div><strong>Total Races:</strong> ${filteredRaces}</div>
-                        <div><strong>Total Athletes:</strong> ${filteredAthletes}</div>
+                        <div style="display: flex; align-items: center;">
+                            <img src="LVAC_2024_logo.png" alt="LVAC Logo">
+                            <h2>Race Results</h2>
+                        </div>
+                        <div class="stats">
+                            <div><strong>Date From:</strong> ${dateFrom}</div>
+                            <div><strong>Date To:</strong> ${dateTo}</div>
+                            <div><strong>Total Races:</strong> ${filteredRaces}</div>
+                            <div><strong>Total Athletes:</strong> ${filteredAthletes}</div>
+                        </div>
                     </div>
                     ${table}
                 </body>
