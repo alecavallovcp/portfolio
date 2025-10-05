@@ -231,14 +231,15 @@
         .col-distance-km {
             max-width: 72px; /* Ancho máximo */
         }
-        .col-pace-min-km {
+        .col-pace-min-km, .col-pace-minkm {
             max-width: 62px; /* Ancho máximo */
         }
+
         .col-time {
             min-width: 70px; /* Ancho minimo */
         }
         .col-location, .col-race-name {
-            min-width: 100px; /* Ancho minimo */
+            min-width: 122px; /* Ancho minimo */
         }        
         td.col-athlete {
             font-weight: bold;
@@ -371,6 +372,8 @@
             <!-- Results Table -->
             <div class="section">
                 <h3 class="section-title" id="tableTitle">Race Results</h3>
+                <button class="btn btn-primary" onclick="updateTable(200)" style="margin-left: 0.5rem;">Show Full Table</button>
+                <button class="btn btn-primary" onclick="printTable()" style="margin-bottom: 1rem;">Print Table</button>
                 <div class="table-container">
                     <table>
                         <thead id="tableHeader"></thead>
@@ -833,7 +836,7 @@
             });
         }
 
-        function updateTable() {
+        function updateTable(limit = 100) {
             if (allData.length === 0) return;
             
             const columns = Object.keys(allData[0]).filter(col => visibleColumns[col]);
@@ -847,7 +850,7 @@
             
             // Body
             let bodyHTML = '';
-            const displayData = filteredData.slice(0, 100);
+            const displayData = filteredData.slice(0, limit); // Usa el límite proporcionad
             displayData.forEach(row => {
                 bodyHTML += '<tr>';
                 columns.forEach(col => {
@@ -858,7 +861,59 @@
             
             // Update title
             document.getElementById('tableTitle').textContent = 
-                `Race Results (${filteredData.length} records${filteredData.length > 100 ? ', showing first 100' : ''})`;
+                `Race Results (${filteredData.length} records${filteredData.length > limit ? `, showing first ${limit}` : ''})`;
+        }
+
+        function printTable() {
+            // Selecciona la tabla
+            const table = document.querySelector('.table-container').innerHTML;
+        
+            // Crea una nueva ventana
+            const printWindow = window.open('', '_blank');
+        
+            // Escribe el contenido de la tabla en la nueva ventana
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Print Table</title>
+                    <style>
+                        body {
+                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+                            color: #111827;
+                            margin: 1rem;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        th, td {
+                            padding: 0.4rem;
+                            text-align: left;
+                            border: 1px solid #e5e7eb;
+                            font-size: 0.75rem;
+                        }
+                        thead {
+                            background-color: #f3f4f6;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h2>Race Results</h2>
+                    ${table}
+                </body>
+                </html>
+            `);
+        
+            // Espera a que el contenido se cargue y luego imprime
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+        
+            // Cierra la ventana después de imprimir
+            printWindow.close();
         }
 
         // Initialize on load
