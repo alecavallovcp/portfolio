@@ -145,10 +145,21 @@
             background-color: #1e3a8a;
             color: white;
         }
-        
         .btn-primary:hover {
             background-color: #1e40af;
         }
+        
+        /* Estilo para los botones marrones */
+        .btn-brown {
+            background-color: #78350f; /* Marrón oscuro */
+            color: white;
+        }
+        
+        .btn-brown:hover {
+            background-color: #a16207; /* Marrón más claro al pasar el mouse */
+        }
+        
+
         
         .stats-grid {
             display: grid;
@@ -228,13 +239,13 @@
         }
 
         /* Centrar el contenido de columnas específicas */
-        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace-min-km, .col-category {
+        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace-minkm, .col-category, .col-time {
             text-align: center;
         }  
         .col-distance-km {
             max-width: 72px; /* Ancho máximo */
         }
-        .col-pace-min-km, .col-pace-minkm {
+        .col-pace-minkm {
             max-width: 62px; /* Ancho máximo */
         }
 
@@ -247,11 +258,13 @@
         td.col-athlete {
             font-weight: bold;
             white-space: nowrap; /* Evitar que el texto se corte en varias líneas */
+            padding-right: 10px;
         }
         td.col-date {
             font-weight: bold;
             font-size: small;
             white-space: nowrap;
+            padding-right: 10px;
         }
         
         .table-container {
@@ -893,7 +906,6 @@
                             border-collapse: collapse;
                         }
                         th, td {
-                            padding: 0.4rem;
                             text-align: left;
                             border: 1px solid #e5e7eb;
                             font-size: 0.75rem;
@@ -907,13 +919,13 @@
                             margin-bottom: 0.5rem;
                         }
                         /* Centrar el contenido de columnas específicas */
-                        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace-min-km, .col-category {
+                        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace-minkm, .col-category, .col-time {
                             text-align: center;
                         }  
                         .col-distance-km {
                             max-width: 72px; /* Ancho máximo */
                         }
-                        .col-pace-min-km, .col-pace-minkm {
+                        .col-pace-minkm {
                             max-width: 62px; /* Ancho máximo */
                         }
 
@@ -926,11 +938,13 @@
                         td.col-athlete {
                             font-weight: bold;
                             white-space: nowrap; /* Evitar que el texto se corte en varias líneas */
+                            padding-right: 10px;
                         }
                         td.col-date {
                             font-weight: bold;
                             font-size: small;
                             white-space: nowrap;
+                            padding-right: 10px;
                         }
                     </style>
                 </head>

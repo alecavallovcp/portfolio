@@ -18,21 +18,23 @@ OK -> Achicar los otros tres gráficos Races by Surface, Participants by Gender 
 
 21:38 04/10/2025
 OK -> Races by Surface and Surface Breakdown (OK) tiene que ser de se las filteredRaces.
+OK -> El cálculo e distancia todavía no funciona.
+OK -> Gráfico Races by Month que ocupe todo el ancho de la pantalla.
+OK -> Ancho de la columna DATE que sea lo suficientemente ancha para que entre YYYY-MM-DD en un sólo renglón.
 
+02:37 05/10/2025
+OK -> Salto de página para la impresión. O mejor que se pueda exportar la tabla? Imprimirla directamente?
+OK -> Multiples páginas cuando haya más de 100 registros, o botón "Show All" para que despliegue toda la tabla.
 
 Ver dónde ingresar los totales de registro. Capaz una pequeña línea en algún lado con el total de registrations, races, athletes.
 
-Salto de página para la impresión. O mejor que se pueda exportar la tabla? Imprimirla directamente?
-
 Mostrar fecha de registro más antiguo y última fecha registrada.
-
-El cálculo e distancia todavía no funciona.
-
-Gráfico Races by Month que ocupe todo el ancho de la pantalla.
 
 Filtrar por distancia Min y Max
 
-Ancho de la columna DATE que sea lo suficientemente ancha para que entre YYYY-MM-DD en un sólo renglón.
+Athlete Name clickeable con link para filtrar por su nombre.
+
+Encabezados de tabla clickeables para ordenar de manera Ascendente o Descendente.
 
 
 
