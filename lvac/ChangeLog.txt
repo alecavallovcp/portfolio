@@ -1,19 +1,17 @@
-PARA QUE CORRIJA CLAUDE.
-Excelente. El archivo se carga correctamente y los datos se visualizan muy bien.
-Quisiera que me entregues una versión nueva por vez, es decir no me hagas muchas versiones seguidas porque me consumen tokens.
+16:22 01/10/2025
+Versión base creada con Claude IA.
+Modificaciones posteriores directamente en Visual Studio Code con la ayuda del Chat (GPT-4o).
+
 OK -> Quisiera que de forma predeterminada suceda lo siguiente:
 OK -> Column Visibility: Desactivar los campos ID, LOCATION, SURFACE, ORGANISATION, CATEGORY, GRADE.
 OK -> Gráfico Participants by Gender: Color AZUL para Men, color ROJO para Women.
 OK -> Filters: Borrar Distance. Hacer que Race Name se pueda filtrar por palabra clave al igual que Athlete Name pero que a la vez se puedan ver los nombres de las carreras y hacer selecciones múltiples, darle más importancia que Surface y Gender.
-Otros cambios:
-Corregir el cálculo de Total Distance (km) Avg Pace (min/km) porque muestran 0 (cero) todo el tiempo.
+OK -> Corregir el cálculo de Total Distance (km) Avg Pace (min/km) porque muestran 0 (cero) todo el tiempo.
 
-
-Dame el código necesario para agregar un botón justo debajo de "Filtros" que configure Date From en 01/10/2024 y "Date To" en 30/09/2025 -> OK
+OK ->Dame el código necesario para agregar un botón justo debajo de "Filtros" que configure Date From en 01/10/2024 y "Date To" en 30/09/2025
 
 13:22 04/10/2025
 OK -> Agregados botones para filtrar por año 2024 y 2025
-
 OK -> Achicar los otros tres gráficos Races by Surface, Participants by Gender y Surface Breakdown.
 
 21:38 04/10/2025
@@ -34,6 +32,13 @@ OK -> Al imprimir, enviar el logo de LVAC a la izquierda del título.
 OK -> Ver dónde ingresar los totales de registro. Capaz una pequeña línea en algún lado con el totalRecords, totalRaces, totalAthletes.
 OK -> Mostrar fecha de registro más antiguo y última fecha registrada.
 
+22:34 05/10/2025
+OK -> El botón Show Full Table debería desactivarse si la tabla no está limitada.
+
+
+El gráfico Races by Month las barras tienen distintos colores pero no sé en base a qué.
+
+Races by Month tiene demasiadas leyendas. Simplificar por ejemplo 1 color distinto según el tipo de surface.
 
 Filtrar por distancia Min y Max.
 
@@ -43,5 +48,4 @@ Encabezados de tabla clickeables para ordenar de manera Ascendente o Descendente
 
 Al imprimir, enviar una nota opcional que se agregue como descripción debajo del título, antes de la tabla.
 
-El botón Show Full Table debería desactivarse si la tabla no está limitada.
 

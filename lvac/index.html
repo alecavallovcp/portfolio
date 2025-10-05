@@ -206,8 +206,8 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             padding: 1.5rem;
         }
-        
-        .chart-title, .chart-title2 {
+
+        .chart-title, .chart-title2, .chart-title3 {
             font-size: 1.25rem;
             font-weight: bold;
             margin-bottom: 1rem;
@@ -388,7 +388,7 @@
             <!-- Results Table -->
             <div class="section">
                 <h3 class="section-title" id="tableTitle">Race Results</h3>
-                <button class="btn btn-brown" onclick="updateTable(10000)" style="margin-left: 0.5rem;">Show Full Table</button>
+                <button id="showFullTableBtn" class="btn btn-brown" onclick="updateTable(10000)" style="margin-left: 0.5rem;" disabled>Show Full Table</button>
                 <button class="btn btn-brown" onclick="printTable()" style="margin-bottom: 0.3rem;">Print Table</button>
                 <div class="table-container">
                     <table>
@@ -418,7 +418,7 @@
                     <div id="surfaceList" class="surface-list"></div>
                 </div>
                 <div class="chart-container">
-                    <h3 class="chart-title">Participations by Gender</h3>
+                    <h3 class="chart-title3">Participations by Gender</h3>
                     <canvas id="genderChart"></canvas>
                 </div>            
             </div>
@@ -806,7 +806,7 @@
                                 generateLabels: function(chart) {
                                     const data = chart.data;
                                     return data.labels.map((label, index) => ({
-                                        text: `${label} [${data.datasets[0].data[index]}]`, // Agrega el conteo a la etiqueta
+                                        text: `${label} (${data.datasets[0].data[index]})`, // Agrega el conteo a la etiqueta
                                         fillStyle: data.datasets[0].backgroundColor[index],
                                         hidden: false,
                                         index: index
@@ -837,7 +837,7 @@
             };
 
             // Actualiza el título con el conteo total
-            const genderChartTitle = document.querySelector('.chart-title');
+            const genderChartTitle = document.querySelector('.chart-title3');
             genderChartTitle.textContent = `Participations by Gender [${totalParticipations}]`;
 
             // Crear el gráfico
@@ -887,7 +887,7 @@
             
             // Body
             let bodyHTML = '';
-            const displayData = filteredData.slice(0, limit); // Usa el límite proporcionad
+            const displayData = filteredData.slice(0, limit); // Usa el límite proporcionado
             displayData.forEach(row => {
                 bodyHTML += '<tr>';
                 columns.forEach(col => {
@@ -897,8 +897,18 @@
             document.getElementById('tableBody').innerHTML = bodyHTML;
             
             // Update title
-            document.getElementById('tableTitle').textContent = 
-                `Race Results (${filteredData.length} records${filteredData.length > limit ? `, showing first ${limit}` : ''})`;
+            const tableTitle = document.getElementById('tableTitle');
+            const isFiltered = filteredData.length > limit;
+            tableTitle.textContent = 
+                `Race Results (${filteredData.length} records${isFiltered ? `, showing first ${limit}` : ''})`;
+
+            // Enable or disable the "Show Full Table" button
+            const showFullTableBtn = document.getElementById('showFullTableBtn');
+            if (isFiltered) {
+                showFullTableBtn.disabled = false; // Habilitar si está filtrado
+            } else {
+                showFullTableBtn.disabled = true; // Deshabilitar si no está filtrado
+            }
         }
 
         function printTable() {
