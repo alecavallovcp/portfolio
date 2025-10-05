@@ -375,8 +375,8 @@
             <!-- Results Table -->
             <div class="section">
                 <h3 class="section-title" id="tableTitle">Race Results</h3>
-                <button class="btn btn-primary" onclick="updateTable(10000)" style="margin-left: 0.5rem;">Show Full Table</button>
-                <button class="btn btn-primary" onclick="printTable()" style="margin-bottom: 1rem;">Print Table</button>
+                <button class="btn btn-brown" onclick="updateTable(10000)" style="margin-left: 0.5rem;">Show Full Table</button>
+                <button class="btn btn-brown" onclick="printTable()" style="margin-bottom: 0.3rem;">Print Table</button>
                 <div class="table-container">
                     <table>
                         <thead id="tableHeader"></thead>
@@ -886,7 +886,7 @@
                         body {
                             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
                             color: #111827;
-                            margin: 1rem;
+                            margin: 0rem;
                         }
                         table {
                             width: 100%;
@@ -900,6 +900,37 @@
                         }
                         thead {
                             background-color: #f3f4f6;
+                        }
+                        
+                        h2 {
+                            margin-top: 0;
+                            margin-bottom: 0.5rem;
+                        }
+                        /* Centrar el contenido de columnas específicas */
+                        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace-min-km, .col-category {
+                            text-align: center;
+                        }  
+                        .col-distance-km {
+                            max-width: 72px; /* Ancho máximo */
+                        }
+                        .col-pace-min-km, .col-pace-minkm {
+                            max-width: 62px; /* Ancho máximo */
+                        }
+
+                        .col-time {
+                            min-width: 70px; /* Ancho minimo */
+                        }
+                        .col-location, .col-race-name {
+                            min-width: 122px; /* Ancho minimo */
+                        }        
+                        td.col-athlete {
+                            font-weight: bold;
+                            white-space: nowrap; /* Evitar que el texto se corte en varias líneas */
+                        }
+                        td.col-date {
+                            font-weight: bold;
+                            font-size: small;
+                            white-space: nowrap;
                         }
                     </style>
                 </head>
