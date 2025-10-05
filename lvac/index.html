@@ -158,7 +158,13 @@
         .btn-brown:hover {
             background-color: #a16207; /* Marrón más claro al pasar el mouse */
         }
-        
+        /* Estilo para botones deshabilitados */
+        button:disabled {
+            background-color: #d1d5db; /* Gris claro */
+            color: #9ca3af; /* Gris más oscuro para el texto */
+            cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+            opacity: 0.6; /* Reduce la opacidad */
+        }        
 
         
         .stats-grid {
@@ -906,8 +912,10 @@
             const showFullTableBtn = document.getElementById('showFullTableBtn');
             if (isFiltered) {
                 showFullTableBtn.disabled = false; // Habilitar si está filtrado
+                console.log('Table is filtered. Show Full Table button enabled.');
             } else {
                 showFullTableBtn.disabled = true; // Deshabilitar si no está filtrado
+                console.log('Table is not filtered. Show Full Table button disabled.');
             }
         }
 

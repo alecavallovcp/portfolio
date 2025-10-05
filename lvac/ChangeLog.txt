@@ -48,4 +48,7 @@ Encabezados de tabla clickeables para ordenar de manera Ascendente o Descendente
 
 Al imprimir, enviar una nota opcional que se agregue como descripción debajo del título, antes de la tabla.
 
+Agregar otro filtro a la derecha de Gender que filtre si la palabra Handicap se encuentra dentro e NOTES.
+
+Botón para filtrar las carreras que incluyen una copa del Club, cuyo Race Name contiene la palabra "Cup".
 
