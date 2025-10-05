@@ -884,9 +884,12 @@
             // Selecciona la tabla
             const table = document.querySelector('.table-container').innerHTML;
         
+            // Calcula dinámicamente las fechas según los datos filtrados
+            const filteredDates = filteredData.map(d => d.DATE).filter(Boolean).sort();
+            const dateFrom = filteredDates.length > 0 ? filteredDates[0] : 'N/A'; // Primera fecha
+            const dateTo = filteredDates.length > 0 ? filteredDates[filteredDates.length - 1] : 'N/A'; // Última fecha
+
             // Obtén las estadísticas necesarias
-            const dateFrom = filters.dateFrom || 'N/A';
-            const dateTo = filters.dateTo || 'N/A';
             const filteredRaces = new Set(filteredData.map(d => d.ID)).size;
             const filteredAthletes = new Set(filteredData.map(d => d.ATHLETE)).size;
             
@@ -916,6 +919,7 @@
                         .header img {
                             width: 50px; /* Ajusta el tamaño del logo */
                             margin-right: 1rem;
+                            margin-bottom: 0.2rem;
                         }
                         .header h2 {
                             margin: 0;
