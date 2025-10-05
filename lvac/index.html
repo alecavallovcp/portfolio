@@ -216,7 +216,7 @@
         }
         
         th {
-            font-weight: 600;
+            /*font-weight: 600;*/
             color: #374151;
         }
         
@@ -225,18 +225,30 @@
         }
 
         /* Centrar el contenido de columnas específicas */
-        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace {
+        .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace-min-km, .col-category {
             text-align: center;
+        }  
+        .col-distance-km {
+            max-width: 72px; /* Ancho máximo */
         }
-  
+        .col-pace-min-km {
+            max-width: 62px; /* Ancho máximo */
+        }
         .col-time {
             min-width: 70px; /* Ancho minimo */
         }
-        
-        .col-athlete {
+        .col-location, .col-race-name {
+            min-width: 100px; /* Ancho minimo */
+        }        
+        td.col-athlete {
+            font-weight: bold;
             white-space: nowrap; /* Evitar que el texto se corte en varias líneas */
         }
-    
+        td.col-date {
+            font-weight: bold;
+            font-size: small;
+            white-space: nowrap;
+        }
         
         .table-container {
             overflow-x: auto;
@@ -829,8 +841,7 @@
             // Header
             let headerHTML = '<tr>';
             columns.forEach(col => {
-                headerHTML += `<th class="col-${col.toLowerCase().replace(/\s+/g, '-')}">${col}</th>`;
-            });
+                headerHTML += `<th class="col-${col.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">${col}</th>`;            });
             headerHTML += '</tr>';
             document.getElementById('tableHeader').innerHTML = headerHTML;
             
@@ -840,8 +851,7 @@
             displayData.forEach(row => {
                 bodyHTML += '<tr>';
                 columns.forEach(col => {
-                    bodyHTML += `<td class="col-${col.toLowerCase().replace(/\s+/g, '-')}">${row[col] || ''}</td>`;
-                });
+                    bodyHTML += `<td class="col-${col.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">${row[col] || ''}</td>`;                });
                 bodyHTML += '</tr>';
             });
             document.getElementById('tableBody').innerHTML = bodyHTML;
