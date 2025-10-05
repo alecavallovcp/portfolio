@@ -36,5 +36,7 @@ Athlete Name clickeable con link para filtrar por su nombre.
 
 Encabezados de tabla clickeables para ordenar de manera Ascendente o Descendente.
 
+Al imprimir, enviar las estadísticas como dateFrom, dateTo, filteredRaces, filteredAthletes
+
 
 
