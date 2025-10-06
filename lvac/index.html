@@ -467,6 +467,17 @@
             'XC': '#8B5CF6', //Morado
             'Trail': '#10B981' //Verde
         };
+        
+        const MONTH_COLORS = [
+                '#FF5733', // Rojo anaranjado
+                '#33FF57', // Verde brillante
+                '#3357FF', // Azul brillante
+                '#FF33A1', // Rosa
+                '#FFC300', // Amarillo
+                '#8E44AD', // Morado
+                '#16A085', // Verde azulado
+                '#E74C3C'  // Rojo
+            ];
 
         let charts = {
             month: null,
@@ -765,20 +776,17 @@
                 }
             });
             
+            // Calcular el total de carreras por mes
             const months = Object.keys(monthData).sort();
+            const monthTotals = months.map(month => {
+                return Object.values(monthData[month]).reduce((a, b) => a + b, 0); // Sumar todas las carreras del mes
+            });
+
+            // Actualizar las etiquetas para incluir el total de carreras
+            const monthLabels = months.map((month, index) => `${month} (${monthTotals[index]})`);
+
             const raceNames = [...new Set(filteredData.map(d => d['RACE NAME']).filter(Boolean))];
             
-            const MONTH_COLORS = [
-                '#FF5733', // Rojo anaranjado
-                '#33FF57', // Verde brillante
-                '#3357FF', // Azul brillante
-                '#FF33A1', // Rosa
-                '#FFC300', // Amarillo
-                '#8E44AD', // Morado
-                '#16A085', // Verde azulado
-                '#E74C3C'  // Rojo
-            ];
-
             const datasets = raceNames.map((race, idx) => ({
                 label: race,
                 data: months.map(month => monthData[month][race] || 0),
@@ -789,7 +797,7 @@
             charts.month = new Chart(document.getElementById('monthChart'), {
                 type: 'bar',
                 data: {
-                    labels: months,
+                    labels: monthLabels, // Usar las etiquetas con el total de carreras
                     datasets: datasets
                 },
                 options: {
