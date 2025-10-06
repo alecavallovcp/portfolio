@@ -37,9 +37,17 @@ OK -> El botón Show Full Table debería desactivarse si la tabla no está limit
 
 18:17 06/10/2025
 OK -> La tabla que se imprime debe ser la tabla sin slice().
-Agregar un stat totalRecords al imprimir.
-En la tabla se puede hacer el Athlete Name clickeable para filtrar por su nombre.
+OK -> Agregar un stat totalRecords al imprimir.
+OK -> En la tabla se puede hacer el Athlete Name clickeable para filtrar por su nombre.
+OK -> Color del link en el nombre azul como el club.
+OK -> Columna SURFACE que esté visible al cargar.
 
+19:47 06/10/2025 v4
+OK -> El gráfico Races by Month las barras tienen distintos colores pero no sé en base a qué. Son colores aleatorios. Creo MONTH_COLOURS para que se usen esos colores cíclicamente.
+OK -> Races by Month mostrar la cantidad de races en la label del month. Mostraba participaciones. Corregido a carreras por cada mes.
+
+20:28 06/10/2025 
+Mejorar las labels dentro de month, colocándolas arriba  cada barra.
 
 FUTURE IMPROVEMENTS:
 Filtrar por distancia Min y Max.
@@ -52,5 +60,4 @@ Agregar otro filtro a la derecha de Gender que filtre si la palabra Handicap se 
 
 Botón para filtrar las carreras que incluyen una copa del Club, cuyo Race Name contiene la palabra "Cup".
 
-El gráfico Races by Month las barras tienen distintos colores pero no sé en base a qué.
-Races by Month tiene demasiadas leyendas. Simplificar por ejemplo 1 color distinto según el tipo de surface.
+

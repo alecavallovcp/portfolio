@@ -6,7 +6,6 @@
     <title>LVAC Race Results Dashboard</title>
     <script src="js/papaparse.min.js"></script>
     <script src="js/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <!--<script src="js/chartjs-plugin-doughnutlabel.js"></script>-->
     <!--<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>-->
     <style>
@@ -785,7 +784,7 @@
             });
 
             // Actualizar las etiquetas para incluir el total de carreras
-            const monthLabels = months.map((month, index) => `${month} (${monthTotals[index]})`);
+            const monthLabels = months.map((month, index) => `${month} <br>(${monthTotals[index]})`);
 
             const raceNames = [...new Set(filteredData.map(d => d['RACE NAME']).filter(Boolean))];
             
@@ -808,26 +807,8 @@
                     scales: {
                         x: { stacked: true },
                         y: { stacked: true, beginAtZero: true }
-                    },
-                    plugins: {
-                        datalabels: {
-                            display: true, // Mostrar las etiquetas
-                            color: '#374151', // Color del texto
-                            font: {
-                                weight: 'bold', // Negrita
-                                size: 10 // Tamaño de la fuente
-                            },
-                            anchor: 'end', // Posición de la etiqueta (arriba de la barra)
-                            align: 'end', // Alineación de la etiqueta
-                            formatter: function(value, context) {
-                                // Mostrar el total de carreras por mes
-                                const monthIndex = context.dataIndex;
-                                return monthTotals[monthIndex]; // Devuelve el conteo total del mes
-                            }
-                        }
                     }
-                },
-                plugins: [ChartDataLabels] // Activar el plugin
+                }
             });
             
             // Surface Pie Chart
