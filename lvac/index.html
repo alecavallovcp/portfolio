@@ -811,7 +811,10 @@
                     },
                     plugins: {
                         datalabels: {
-                            display: true, // Mostrar las etiquetas
+                            display: function(context) {
+                                // Mostrar la etiqueta solo en el último dataset (para evitar repeticiones)
+                                return context.datasetIndex === datasets.length - 1;
+                            },
                             color: '#374151', // Color del texto
                             font: {
                                 weight: 'bold', // Negrita
