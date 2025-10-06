@@ -920,25 +920,8 @@
         }
 
         function printTable() {
-            // Generar el contenido completo de la tabla
-            const columns = Object.keys(allData[0]).filter(col => visibleColumns[col]);
-            let tableHTML = '<table><thead><tr>';
-
-            // Generar encabezados
-            columns.forEach(col => {
-                tableHTML += `<th class="col-${col.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">${col}</th>`;
-            });
-            tableHTML += '</tr></thead><tbody>';
-
-            // Generar filas con todos los datos filtrados
-            filteredData.forEach(row => {
-                tableHTML += '<tr>';
-                columns.forEach(col => {
-                    tableHTML += `<td class="col-${col.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">${row[col] || ''}</td>`;
-                });
-                tableHTML += '</tr>';
-            });
-            tableHTML += '</tbody></table>';
+            // Selecciona la tabla
+            const table = document.querySelector('.table-container').innerHTML;
         
             // Calcula dinámicamente las fechas según los datos filtrados
             const filteredDates = filteredData.map(d => d.DATE).filter(Boolean).sort();
@@ -996,25 +979,26 @@
                             background-color: #f3f4f6;
                         }
 
+                        /* Centrar el contenido de columnas específicas */
                         .col-surface, .col-place, .col-gender, .col-distance-km, .col-pace-minkm, .col-category, .col-time {
                             text-align: center;
                         }  
                         .col-distance-km {
-                            max-width: 72px; 
+                            max-width: 72px; /* Ancho máximo */
                         }
                         .col-pace-minkm {
-                            max-width: 62px; 
+                            max-width: 62px; /* Ancho máximo */
                         }
 
                         .col-time {
-                            min-width: 70px; 
+                            min-width: 70px; /* Ancho minimo */
                         }
                         .col-location, .col-race-name {
-                            min-width: 122px; 
+                            min-width: 122px; /* Ancho minimo */
                         }        
                         td.col-athlete {
                             font-weight: bold;
-                            white-space: nowrap;
+                            white-space: nowrap; /* Evitar que el texto se corte en varias líneas */
                             padding-right: 10px;
                         }
                         td.col-date {
@@ -1048,7 +1032,7 @@
                             <div><strong>Total Athletes:</strong> ${filteredAthletes}</div>
                         </div>
                     </div>
-                    ${tableHTML}
+                    ${table}
                 </body>
                 </html>
             `);
