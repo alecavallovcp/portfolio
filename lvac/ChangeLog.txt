@@ -47,7 +47,7 @@ OK -> El gráfico Races by Month las barras tienen distintos colores pero no sé
 OK -> Races by Month mostrar la cantidad de races en la label del month. Mostraba participaciones. Corregido a carreras por cada mes.
 
 20:28 06/10/2025 
-Mejorar las labels dentro de month, colocándolas arriba  cada barra.
+OK -> Mejorar las labels dentro de month, colocándolas arriba  cada barra. Uso grace: '5%' para dejarle margen arriba.
 
 FUTURE IMPROVEMENTS:
 Filtrar por distancia Min y Max.
