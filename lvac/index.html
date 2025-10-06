@@ -1167,8 +1167,8 @@
         }
 
 
-            <!-- ========= ORDENACIÓN DE TABLA ========= -->
-            (function makeTableSortable() {
+            //<!-- ========= ORDENACIÓN DE TABLA ========= -->
+            function makeTableSortable() {
             'use strict';
 
             /* Esperamos a que tu hoja se haya renderizado (ajusta selector si usas otro) */
@@ -1236,12 +1236,11 @@
                 const num = parseFloat(txt.replace(/[$,%]/g, ''));
                 return isNaN(num) ? txt.toLowerCase() : num;
             }
-            })();
+            };
 
 
         // Initialize on load
         window.addEventListener('load', init);
-        makeTableSortable();
     </script>
 </body>
 </html>
