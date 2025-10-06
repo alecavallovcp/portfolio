@@ -55,7 +55,8 @@
         .description {
             color: #6b7280;
             line-height: 1.1;
-            max-width: 900px;
+            text-align: justify;
+            /*max-width: 900px;*/
         }
         
         .section {
@@ -317,6 +318,21 @@
             font-weight: bold;
             color: #374151;
         }
+        /* Estilo para los enlaces */
+        a {
+            color: #1e3a8a; /* Color acorde al diseño (azul oscuro) */
+            text-decoration: none; /* Elimina el subrayado */
+            font-weight: bold; /* Opcional: hace el texto más destacado */
+        }
+        /* Estilo para el hover (cuando el mouse pasa por encima) */
+        a:hover {
+            color: #374151; /* Cambia el color al pasar el mouse (gris oscuro) */
+            text-decoration: underline; /* Opcional: agrega subrayado al pasar el mouse */
+        }
+        /* Estilo para enlaces visitados */
+        a:visited {
+            color: #6b7280; /* Color gris para enlaces visitados */
+        }
     </style>
 </head>
 <body>
@@ -446,10 +462,10 @@
         };
         
         const SURFACE_COLORS = {
-            'Road': '#3B82F6',
-            'Trail': '#10B981',
-            'Track': '#F59E0B',
-            'Cross Country': '#8B5CF6'
+            'Road': '#3B82F6', //Azul
+            'Track': '#F59E0B', //Amarillo
+            'XC': '#8B5CF6', //Morado
+            'Trail': '#10B981' //Verde
         };
 
         let charts = {
@@ -468,7 +484,7 @@
                     
                     // Inicializar columnas visibles - desactivar algunas por defecto
                     if (allData.length > 0) {
-                        const hiddenColumns = ['ID', 'LOCATION', 'SURFACE', 'ORGANISATION', 'CATEGORY', 'GRADE', 'NOTES'];
+                        const hiddenColumns = ['ID', 'LOCATION', 'ORGANISATION', 'CATEGORY', 'GRADE', 'NOTES'];
                         Object.keys(allData[0]).forEach(col => {
                             visibleColumns[col] = !hiddenColumns.includes(col);
                         });
@@ -752,10 +768,21 @@
             const months = Object.keys(monthData).sort();
             const raceNames = [...new Set(filteredData.map(d => d['RACE NAME']).filter(Boolean))];
             
+            const MONTH_COLORS = [
+                '#FF5733', // Rojo anaranjado
+                '#33FF57', // Verde brillante
+                '#3357FF', // Azul brillante
+                '#FF33A1', // Rosa
+                '#FFC300', // Amarillo
+                '#8E44AD', // Morado
+                '#16A085', // Verde azulado
+                '#E74C3C'  // Rojo
+            ];
+
             const datasets = raceNames.map((race, idx) => ({
                 label: race,
                 data: months.map(month => monthData[month][race] || 0),
-                backgroundColor: Object.values(SURFACE_COLORS)[idx % 4]
+                backgroundColor: MONTH_COLORS[idx % MONTH_COLORS.length] // Asignar colores cíclicamente
             }));
             
             if (charts.month) charts.month.destroy();
@@ -1039,10 +1066,10 @@
                         }
                         .stats {
                             display: flex;
-                            gap: 1rem; /* Espaciado entre los stats */
+                            gap: 0.2rem;
                             margin-bottom: 0.5rem;
 
-                            font-size: 0.875rem;
+                            font-size: 0.8rem;
                         }
                         .stats div {
                             margin-bottom: -0.2rem;
@@ -1056,11 +1083,11 @@
                             <h2>Race Results</h2>
                         </div>
                         <div class="stats">
-                            <div><strong>Date From:</strong> ${dateFrom}</div>
-                            <div><strong>Date To:</strong> ${dateTo}</div>
-                            <div><strong>Total Races:</strong> ${filteredRaces}</div>
-                            <div><strong>Total Athletes:</strong> ${filteredAthletes}</div>
-                            <div><strong>Total Records:</strong> ${filteredRecords}</div>
+                            <div><strong>Date From:<br></strong> ${dateFrom}</div>
+                            <div><strong>Date To:<br></strong> ${dateTo}</div>
+                            <div><strong>Total Races:<br></strong> ${filteredRaces}</div>
+                            <div><strong>Total Athletes:<br></strong> ${filteredAthletes}</div>
+                            <div><strong>Total Records:<br></strong> ${filteredRecords}</div>
                         </div>
                     </div>
                     ${tableHTML}

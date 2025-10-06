@@ -1,4 +1,4 @@
-16:22 01/10/2025
+16:22 01/10/2025 v1
 Versión base creada con Claude IA.
 Modificaciones posteriores directamente en Visual Studio Code con la ayuda del Chat (GPT-4o).
 
@@ -32,17 +32,17 @@ OK -> Al imprimir, enviar el logo de LVAC a la izquierda del título.
 OK -> Ver dónde ingresar los totales de registro. Capaz una pequeña línea en algún lado con el totalRecords, totalRaces, totalAthletes.
 OK -> Mostrar fecha de registro más antiguo y última fecha registrada.
 
-22:34 05/10/2025
+22:34 05/10/2025 v3
 OK -> El botón Show Full Table debería desactivarse si la tabla no está limitada.
 
+18:17 06/10/2025
+OK -> La tabla que se imprime debe ser la tabla sin slice().
+Agregar un stat totalRecords al imprimir.
+En la tabla se puede hacer el Athlete Name clickeable para filtrar por su nombre.
 
-El gráfico Races by Month las barras tienen distintos colores pero no sé en base a qué.
 
-Races by Month tiene demasiadas leyendas. Simplificar por ejemplo 1 color distinto según el tipo de surface.
-
+FUTURE IMPROVEMENTS:
 Filtrar por distancia Min y Max.
-
-Athlete Name clickeable con link para filtrar por su nombre.
 
 Encabezados de tabla clickeables para ordenar de manera Ascendente o Descendente.
 
@@ -52,3 +52,5 @@ Agregar otro filtro a la derecha de Gender que filtre si la palabra Handicap se 
 
 Botón para filtrar las carreras que incluyen una copa del Club, cuyo Race Name contiene la palabra "Cup".
 
+El gráfico Races by Month las barras tienen distintos colores pero no sé en base a qué.
+Races by Month tiene demasiadas leyendas. Simplificar por ejemplo 1 color distinto según el tipo de surface.
