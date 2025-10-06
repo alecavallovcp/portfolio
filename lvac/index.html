@@ -507,7 +507,8 @@
                     
                     setupUI();
                     updateDisplay();
-
+                    makeTableSortable();
+                    
                     // Mostrar estadísticas completas en el pie de página
                     displayFullStatistics();
                 }
@@ -1241,7 +1242,6 @@
 
         // Initialize on load
         window.addEventListener('load', init);
-        makeTableSortable();
     </script>
 </body>
 </html>
