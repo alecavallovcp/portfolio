@@ -895,11 +895,17 @@
             let bodyHTML = '';
             const displayData = filteredData.slice(0, limit); // Usa el límite proporcionado
             displayData.forEach(row => {
-                bodyHTML += '<tr>';
-                columns.forEach(col => {
-                    bodyHTML += `<td class="col-${col.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">${row[col] || ''}</td>`;                });
-                bodyHTML += '</tr>';
-            });
+                    bodyHTML += '<tr>';
+                    columns.forEach(col => {
+                        if (col === 'ATHLETE') {
+                            // Hacer el nombre del atleta clickeable
+                            bodyHTML += `<td class="col-athlete"><a href="#" onclick="filterByAthlete('${row[col]}')">${row[col] || ''}</a></td>`;
+                        } else {
+                            bodyHTML += `<td class="col-${col.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}">${row[col] || ''}</td>`;
+                        }
+                    });
+                    bodyHTML += '</tr>';
+                });
             document.getElementById('tableBody').innerHTML = bodyHTML;
             
             // Update title
@@ -917,6 +923,13 @@
                 showFullTableBtn.disabled = true; // Deshabilitar si no está filtrado
                 console.log('Table is not filtered. Show Full Table button disabled.');
             }
+        }
+
+        function filterByAthlete(athleteName) {
+            // Actualiza el filtro de atleta
+            document.getElementById('athleteSearch').value = athleteName;
+            filters.athlete = athleteName.toLowerCase();
+            applyFilters();
         }
 
         function printTable() {
@@ -946,6 +959,7 @@
             const dateTo = filteredDates.length > 0 ? filteredDates[filteredDates.length - 1] : 'N/A'; // Última fecha
 
             // Obtén las estadísticas necesarias
+            const filteredRecords = filteredData.length;
             const filteredRaces = new Set(filteredData.map(d => d.ID)).size;
             const filteredAthletes = new Set(filteredData.map(d => d.ATHLETE)).size;
             
@@ -1046,6 +1060,7 @@
                             <div><strong>Date To:</strong> ${dateTo}</div>
                             <div><strong>Total Races:</strong> ${filteredRaces}</div>
                             <div><strong>Total Athletes:</strong> ${filteredAthletes}</div>
+                            <div><strong>Total Records:</strong> ${filteredRecords}</div>
                         </div>
                     </div>
                     ${tableHTML}
