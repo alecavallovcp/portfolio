@@ -46,7 +46,7 @@ OK -> Columna SURFACE que esté visible al cargar.
 OK -> El gráfico Races by Month las barras tienen distintos colores pero no sé en base a qué. Son colores aleatorios. Creo MONTH_COLOURS para que se usen esos colores cíclicamente.
 OK -> Races by Month mostrar la cantidad de races en la label del month. Mostraba participaciones. Corregido a carreras por cada mes.
 
-20:28 06/10/2025 
+20:28 06/10/2025 v5 Movido al GitHub de liffeyvalleyac.com
 OK -> Mejorar las labels dentro de month, colocándolas arriba  cada barra. Uso grace: '5%' para dejarle margen arriba.
 
 FUTURE IMPROVEMENTS:
